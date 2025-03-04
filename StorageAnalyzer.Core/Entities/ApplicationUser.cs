@@ -8,5 +8,5 @@ public class ApplicationUser : IdentityUser
     public ICollection<FolderEntity> Folders { get; set; }
     public ICollection<ScanSession> ScanSessions { get; set; }
     public ICollection<BackupLog> BackupLogs { get; set; }
-    public Settings? Settings { get; set; }  // Legătura cu preferințele utilizatorului
+    public Settings? Settings { get; set; }
 }

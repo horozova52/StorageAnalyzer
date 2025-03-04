@@ -7,5 +7,6 @@
         public string BackupPath { get; set; }
         public long TotalSize { get; set; }
         public ApplicationUser User { get; set; }
+        public string UserId { get; set; }  
     }
 }

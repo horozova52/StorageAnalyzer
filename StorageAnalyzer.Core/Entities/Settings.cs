@@ -3,6 +3,8 @@
     public class Settings
     {
         public Guid Id { get; set; }
+        public string UserId { get; set; }
+
         public bool EnableAutoCleanup { get; set; }
         public bool EnableDuplicateDetection { get; set; }
         public bool EnableBackup { get; set; }

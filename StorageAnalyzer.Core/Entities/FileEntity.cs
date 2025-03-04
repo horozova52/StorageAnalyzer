@@ -8,11 +8,10 @@
         public string Hash { get; set; }
         public DateTime DateModified { get; set; }
 
-        public int FolderId { get; set; }
+        public Guid FolderId { get; set; }
         public FolderEntity Folder { get; set; }
-        public ApplicationUser User { get; set; }
 
-        public int? DuplicateSetId { get; set; }
+        public Guid? DuplicateSetId { get; set; }
         public DuplicateSet DuplicateSet { get; set; }
     }
 }
