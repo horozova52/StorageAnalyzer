@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35825.156
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StorageAnalyzer.Client", "StorageAnalyzer.Client\StorageAnalyzer.Client.csproj", "{4BCDE12E-CB3A-46B8-80A7-EFC30505BE78}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StorageAnalyzer.Server", "StorageAnalyzer.Server\StorageAnalyzer.Server.csproj", "{62FA375F-C682-B415-6FBD-4868A54E0F3B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StorageAnalyzer.Infrastructure", "StorageAnalyzer.Infrastructure\StorageAnalyzer.Infrastructure.csproj", "{9515553D-C66E-4B76-9D06-CDFBAA72A41E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StorageAnalyzer.UseCases", "StorageAnalyzer.UseCases\StorageAnalyzer.UseCases.csproj", "{8E770109-B16A-4601-945C-433DBBEB7AAE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StorageAnalyzer.Shared", "StorageAnalyzer.Shared\StorageAnalyzer.Shared.csproj", "{06700749-EBAC-4809-A503-0582259BAFB0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StorageAnalyzer.Core", "StorageAnalyzer.Core\StorageAnalyzer.Core.csproj", "{DB675B58-5B56-4501-A5E8-ACD2B5F2AE85}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4BCDE12E-CB3A-46B8-80A7-EFC30505BE78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4BCDE12E-CB3A-46B8-80A7-EFC30505BE78}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4BCDE12E-CB3A-46B8-80A7-EFC30505BE78}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4BCDE12E-CB3A-46B8-80A7-EFC30505BE78}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62FA375F-C682-B415-6FBD-4868A54E0F3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62FA375F-C682-B415-6FBD-4868A54E0F3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62FA375F-C682-B415-6FBD-4868A54E0F3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62FA375F-C682-B415-6FBD-4868A54E0F3B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9515553D-C66E-4B76-9D06-CDFBAA72A41E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9515553D-C66E-4B76-9D06-CDFBAA72A41E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9515553D-C66E-4B76-9D06-CDFBAA72A41E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9515553D-C66E-4B76-9D06-CDFBAA72A41E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E770109-B16A-4601-945C-433DBBEB7AAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E770109-B16A-4601-945C-433DBBEB7AAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E770109-B16A-4601-945C-433DBBEB7AAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E770109-B16A-4601-945C-433DBBEB7AAE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06700749-EBAC-4809-A503-0582259BAFB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06700749-EBAC-4809-A503-0582259BAFB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06700749-EBAC-4809-A503-0582259BAFB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06700749-EBAC-4809-A503-0582259BAFB0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB675B58-5B56-4501-A5E8-ACD2B5F2AE85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB675B58-5B56-4501-A5E8-ACD2B5F2AE85}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB675B58-5B56-4501-A5E8-ACD2B5F2AE85}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB675B58-5B56-4501-A5E8-ACD2B5F2AE85}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5AB608CD-E4F0-4E77-B95E-13C557701793}
+	EndGlobalSection
+EndGlobal
