@@ -15,10 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Services\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\StorageAnalyzer.Infrastructure\StorageAnalyzer.Infrastructure.csproj" />
     <ProjectReference Include="..\StorageAnalyzer.Shared\StorageAnalyzer.Shared.csproj" />
     <ProjectReference Include="..\StorageAnalyzer.UseCases\StorageAnalyzer.UseCases.csproj" />
