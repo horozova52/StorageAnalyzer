@@ -8,10 +8,10 @@ namespace StorageAnalyzer.Shared.DataTransferObjects
 {
     public class FileEntityDto
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string FilePath { get; set; }
         public long SizeInBytes { get; set; }
-        public string Hash { get; set; }
+        public string? Hash { get; set; }
         public DateTime DateModified { get; set; }
         public int? FolderId { get; set; }
         public int? DuplicateSetId { get; set; }

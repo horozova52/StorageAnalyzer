@@ -4,6 +4,6 @@
     {
         IScanService CreateScanService();
         IAnalysisService CreateAnalysisService();
-        IBackUpService CreateBackupService();
+        IBackupService CreateBackupService();
     }
 }

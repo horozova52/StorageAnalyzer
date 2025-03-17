@@ -8,6 +8,6 @@ namespace StorageAnalyzer.Infrastructure.Services.Factories
     {
         public IScanService CreateScanService() => new AdvancedScanService();
         public IAnalysisService CreateAnalysisService() => new ClassificationAnalysisService();
-        public IBackUpService CreateBackupService() => new CloudBackUpService();
+        public IBackupService CreateBackupService() => new CloudBackUpService();
     }
 }

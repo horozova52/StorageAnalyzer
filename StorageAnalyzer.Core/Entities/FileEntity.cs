@@ -5,7 +5,7 @@
         public Guid Id { get; set; }
         public string FilePath { get; set; }
         public long SizeInBytes { get; set; }
-        public string Hash { get; set; }
+        public string? Hash { get; set; }
         public DateTime DateModified { get; set; }
 
         public Guid FolderId { get; set; }

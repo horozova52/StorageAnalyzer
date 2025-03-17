@@ -1,6 +1,5 @@
-﻿using StorageAnalyzer.Infrastructure.Services.BackUp.LocalBackUpService;
+﻿using StorageAnalyzer.Infrastructure.Services.BackUp;
 using StorageAnalyzer.Infrastructure.Services.Interfaces;
-using StorageAnalyzer.Infrastructure.Services.Scan;
 
 namespace StorageAnalyzer.Infrastructure.Services.Factories
 {
@@ -8,6 +7,6 @@ namespace StorageAnalyzer.Infrastructure.Services.Factories
     {
         public IScanService CreateScanService() => new DefaultScanService();
         public IAnalysisService CreateAnalysisService() => new DuplicateAnalysisService();
-        public IBackUpService CreateBackupService() => new LocalBackUpService();
+        public IBackupService CreateBackupService() => new LocalBackUpService();
     }
 }
