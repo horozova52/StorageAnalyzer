@@ -14,6 +14,7 @@ using StorageAnalyzer.Usecases.Features.Backups.Handlers;
 using MediatR;
 using StorageAnalyzer.Infrastructure.Repositories.File;
 using StorageAnalyzer.Infrastructure.Repositories.Folder;
+using StorageAnalyzer.Infrastructure.Services.WMI;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -48,6 +49,7 @@ builder.Services.AddScoped<IBackupService, LocalBackUpService>();
 builder.Services.AddScoped<IBackupRepository, BackupRepository>();
 builder.Services.AddScoped<IFileRepository, FileRepository>();
 builder.Services.AddScoped<IFolderRepository, FolderRepository>();
+builder.Services.AddScoped<IDiskInfoService, DiskInfoService>();
 
 
 

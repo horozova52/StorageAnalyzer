@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.IO;
 using StorageAnalyzer.Shared.DataTransferObjects;
+using StorageAnalyzer.Infrastructure.Services.WMI;
+using StorageAnalyzer.Shared.DataTransferObjects;
 
 namespace StorageAnalyzer.Server.Controllers
 {
@@ -8,6 +10,21 @@ namespace StorageAnalyzer.Server.Controllers
     [Route("api/[controller]")]
     public class DiskController : ControllerBase
     {
+
+        private readonly IDiskInfoService _diskInfoService;
+
+        public DiskController(IDiskInfoService diskInfoService)
+        {
+            _diskInfoService = diskInfoService;
+        }
+
+        [HttpGet("status")]
+        public async Task<ActionResult<List<DiskStatusDto>>> GetDiskStatus()
+        {
+            var disks = await _diskInfoService.GetDiskInfoAsync();
+            return Ok(disks);
+        }
+
         [HttpGet("structure")]
         public ActionResult<DiskDto> GetStructure([FromQuery] string path)
         {
