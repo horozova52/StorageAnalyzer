@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace StorageAnalyzer.UseCases.Features.Files.Queries
 {
-    class GetAllFilesQuery
+    class SearchFilesQuery
     {
     }
 }

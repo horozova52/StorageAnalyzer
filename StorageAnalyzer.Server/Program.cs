@@ -12,6 +12,8 @@ using StorageAnalyzer.Server.Components;
 using StorageAnalyzer.Server.Components.Account;
 using StorageAnalyzer.Usecases.Features.Backups.Handlers;
 using MediatR;
+using StorageAnalyzer.Infrastructure.Repositories.File;
+using StorageAnalyzer.Infrastructure.Repositories.Folder;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -44,6 +46,10 @@ builder.Services.AddScoped<DefaultServiceFactory>();
 builder.Services.AddScoped<AdvancedServiceFactory>();
 builder.Services.AddScoped<IBackupService, LocalBackUpService>();
 builder.Services.AddScoped<IBackupRepository, BackupRepository>();
+builder.Services.AddScoped<IFileRepository, FileRepository>();
+builder.Services.AddScoped<IFolderRepository, FolderRepository>();
+
+
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
     ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");

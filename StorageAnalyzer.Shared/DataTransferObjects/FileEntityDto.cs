@@ -13,7 +13,8 @@ namespace StorageAnalyzer.Shared.DataTransferObjects
         public long SizeInBytes { get; set; }
         public string? Hash { get; set; }
         public DateTime DateModified { get; set; }
-        public int? FolderId { get; set; }
-        public int? DuplicateSetId { get; set; }
+        public Guid? FolderId { get; set; }
+        public Guid? DuplicateSetId { get; set; }
+        public string UserId { get; set; }
     }
 }

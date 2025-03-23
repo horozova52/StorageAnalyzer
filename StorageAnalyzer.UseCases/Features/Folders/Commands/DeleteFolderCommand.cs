@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MediatR;
 
-namespace StorageAnalyzer.UseCases.Features.Folders.Commands
+namespace StorageAnalyzer.Usecases.Features.Folders.Commands
 {
-    class DeleteFolderCommand
+    public class DeleteFolderCommand : IRequest<bool>
     {
+        public Guid FolderId { get; set; }
     }
 }
