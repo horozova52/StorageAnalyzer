@@ -16,4 +16,12 @@ namespace StorageAnalyzer.Shared.DataTransferObjects
         public List<DiskDto> Children { get; set; } = new();
     }
 
+    //public class DiskDto
+    //{
+    //    public string Name { get; set; }
+    //    public long TotalSize { get; set; } 
+    //    public long FreeSpace { get; set; } 
+    //}
+
+
 }

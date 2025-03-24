@@ -10,7 +10,6 @@ namespace StorageAnalyzer.Server.Controllers
     [Route("api/[controller]")]
     public class DiskController : ControllerBase
     {
-
         private readonly IDiskInfoService _diskInfoService;
 
         public DiskController(IDiskInfoService diskInfoService)
@@ -28,28 +27,79 @@ namespace StorageAnalyzer.Server.Controllers
         [HttpGet("structure")]
         public ActionResult<DiskDto> GetStructure([FromQuery] string path)
         {
-            // 1. Validăm că user-ul a trimis ceva
             if (string.IsNullOrWhiteSpace(path))
             {
                 return BadRequest("Path parameter is required, e.g. /api/disk/structure?path=C:\\SomeFolder");
             }
 
-            // 2. Verificăm dacă folderul există
             if (!Directory.Exists(path))
             {
                 return NotFound($"Directory not found: {path}");
             }
 
-            // 3. Construim structura arborelui
             var diskNode = BuildDiskTree(path);
             return Ok(diskNode);
+        }
+
+        [HttpGet("scan")]
+        public ActionResult<List<DiskDto>> ScanFiles([FromQuery] string path)
+        {
+            if (string.IsNullOrWhiteSpace(path))
+            {
+                return BadRequest("Path parameter is required, e.g. /api/disk/scan?path=C:\\SomeFolder");
+            }
+
+            if (!Directory.Exists(path))
+            {
+                return NotFound($"Directory not found: {path}");
+            }
+
+            var files = GetFiles(path);
+            return Ok(files);
+        }
+
+        private List<DiskDto> GetFiles(string path)
+        {
+            var fileDtos = new List<DiskDto>();
+            var dirInfo = new DirectoryInfo(path);
+
+            FileInfo[] files = null;
+            try
+            {
+                files = dirInfo.GetFiles();
+            }
+            catch (UnauthorizedAccessException)
+            {
+            }
+            catch (IOException ex)
+            {
+            }
+            catch (Exception ex)
+            {
+            }
+
+            if (files != null)
+            {
+                foreach (var file in files)
+                {
+                    var fileDto = new DiskDto
+                    {
+                        Name = file.Name,
+                        FullPath = file.FullName,
+                        Size = file.Length,
+                        LastModified = file.LastWriteTime
+                    };
+                    fileDtos.Add(fileDto);
+                }
+            }
+
+            return fileDtos;
         }
 
         private DiskDto BuildDiskTree(string path)
         {
             var dirInfo = new DirectoryInfo(path);
 
-            // Creăm nodul "folder"
             var rootDto = new DiskDto
             {
                 Name = dirInfo.Name,
@@ -58,7 +108,6 @@ namespace StorageAnalyzer.Server.Controllers
                 LastModified = dirInfo.LastWriteTime
             };
 
-            // 1. Obținem subfolderele
             DirectoryInfo[] subDirs = null;
             try
             {
@@ -75,25 +124,20 @@ namespace StorageAnalyzer.Server.Controllers
             }
             catch (IOException ex)
             {
-                
             }
             catch (Exception ex)
             {
-                
             }
 
-            // Dacă am reușit să luăm subfoldere
             if (subDirs != null)
             {
                 foreach (var subDir in subDirs)
                 {
-                    // Apel recursiv
                     var subFolderDto = BuildDiskTree(subDir.FullName);
                     rootDto.Children.Add(subFolderDto);
                 }
             }
 
-            // 2. Obținem fișierele
             FileInfo[] files = null;
             try
             {
@@ -110,14 +154,11 @@ namespace StorageAnalyzer.Server.Controllers
             }
             catch (IOException ex)
             {
-                // Alte erori de IO
             }
             catch (Exception ex)
             {
-                // Erori generale
             }
 
-            // Dacă am reușit să luăm fișierele
             if (files != null)
             {
                 foreach (var file in files)
@@ -136,6 +177,5 @@ namespace StorageAnalyzer.Server.Controllers
 
             return rootDto;
         }
-
     }
 }
