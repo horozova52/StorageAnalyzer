@@ -14,7 +14,7 @@ using MediatR;
 using StorageAnalyzer.Infrastructure.Repositories.File;
 using StorageAnalyzer.Infrastructure.Repositories.Folder;
 using StorageAnalyzer.Infrastructure.Services.WMI;
-using StorageAnalyzer.UseCases.Features.Backups.Queries;
+using StorageAnalyzer.UseCases.Features.Backups.Handlers;
 
 var builder = WebApplication.CreateBuilder(args);
 
