@@ -17,4 +17,8 @@
     <ProjectReference Include="..\StorageAnalyzer.Infrastructure\StorageAnalyzer.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\Backups\Handlers\" />
+  </ItemGroup>
+
 </Project>

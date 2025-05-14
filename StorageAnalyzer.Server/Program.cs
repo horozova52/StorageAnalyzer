@@ -10,11 +10,11 @@ using StorageAnalyzer.Infrastructure.Services.Factories;
 using StorageAnalyzer.Infrastructure.Services.Interfaces;
 using StorageAnalyzer.Server.Components;
 using StorageAnalyzer.Server.Components.Account;
-using StorageAnalyzer.Usecases.Features.Backups.Handlers;
 using MediatR;
 using StorageAnalyzer.Infrastructure.Repositories.File;
 using StorageAnalyzer.Infrastructure.Repositories.Folder;
 using StorageAnalyzer.Infrastructure.Services.WMI;
+using StorageAnalyzer.UseCases.Features.Backups.Queries;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -45,12 +45,13 @@ builder.Services.AddAuthorization();
 
 builder.Services.AddScoped<DefaultServiceFactory>();
 builder.Services.AddScoped<AdvancedServiceFactory>();
-builder.Services.AddScoped<IBackupService, LocalBackUpService>();
+//builder.Services.AddScoped<IBackupService, LocalBackUpService>();
 builder.Services.AddScoped<IBackupRepository, BackupRepository>();
 builder.Services.AddScoped<IFileRepository, FileRepository>();
+builder.Services.AddScoped<IScanRepository, ScanRepository>();
 builder.Services.AddScoped<IFolderRepository, FolderRepository>();
 builder.Services.AddScoped<IDiskInfoService, DiskInfoService>();
-
+builder.Services.AddScoped<IServiceFactory, DefaultServiceFactory>();
 
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")

@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using StorageAnalyzer.Infrastructure.Services.Factories;
 using StorageAnalyzer.Infrastructure.Services.Interfaces;
 using StorageAnalyzer.Shared.DataTransferObjects;
+using StorageAnalyzer.UseCases.Features.Scans.Queries;
 
 namespace StorageAnalyzer.Server.Controllers
 {
@@ -9,48 +11,49 @@ namespace StorageAnalyzer.Server.Controllers
     [Route("api/[controller]")]
     public class ScanController : ControllerBase
     {
-        private readonly DefaultServiceFactory _defaultFactory;
-        private readonly AdvancedServiceFactory _advancedFactory;
+        private readonly IMediator _mediator;
+        private readonly IServiceFactory _factory;   // una singură (default SAU advanced)
 
-        // Injectăm ambele fabrici, să putem alege la runtime.
-        public ScanController(DefaultServiceFactory defaultFactory, AdvancedServiceFactory advancedFactory)
+        public ScanController(IMediator mediator, IServiceFactory factory)
         {
-            _defaultFactory = defaultFactory;
-            _advancedFactory = advancedFactory;
+            _mediator = mediator;
+            _factory = factory;      // DI îţi dă implementarea înregistrată în Program.cs
         }
 
+        // ---------------- CQRS endpoints ----------------
+        [HttpPost("start")]
+        public async Task<ActionResult<ScanSessionDto>> StartScan([FromBody] StartScanCommand cmd)
+            => Ok(await _mediator.Send(cmd));
+
+        [HttpGet("sessions")]
+        public async Task<ActionResult<List<ScanSessionDto>>> Sessions()
+            => Ok(await _mediator.Send(new GetScanSessionsQuery()));
+
+        [HttpGet("files/{sessionId}")]
+        public async Task<ActionResult<List<FileEntityDto>>> Files(Guid sessionId)
+            => Ok(await _mediator.Send(new GetFilesBySessionQuery { SessionId = sessionId }));
+
+        // ---------------- Abstract-Factory demo ----------------
         [HttpGet("test")]
-        public async Task<IActionResult> TestFactory([FromQuery] string path = "C:\\Temp", [FromQuery] bool useAdvanced = false)
+        public async Task<IActionResult> TestFactory([FromQuery] string path = "C:\\Temp")
         {
-            // 1. Alegem fabrica la runtime
-            IServiceFactory factory = useAdvanced
-                ? (IServiceFactory)_advancedFactory
-                : (IServiceFactory)_defaultFactory;
+            var scanService = _factory.CreateScanService();
+            var analysisService = _factory.CreateAnalysisService();
+            var backupService = _factory.CreateBackupService();
 
-            // 2. Creăm servicii
-            var scanService = factory.CreateScanService();
-            var analysisService = factory.CreateAnalysisService();
-            var backupService = factory.CreateBackupService();
-
-            // 3. Scanăm
-            var files = scanService.Scan(path); // Sincron
-
-            // 4. Analizăm
+            var files = scanService.Scan(path);
             var analysisResult = analysisService.Analyze(files);
-
-            // 5. Backup asincron (dacă e local sau cloud)
             var backupResult = await backupService.BackupAsync(files, "C:\\Backups\\TestFactory");
 
-            // 6. Returnăm un JSON simplu cu date
             return Ok(new
             {
-                UsedFactory = useAdvanced ? "Advanced" : "Default",
+                FactoryType = _factory.GetType().Name,
                 Path = path,
                 ScannedFilesCount = files.Count,
                 AnalysisResult = analysisResult,
-                BackupResult = backupResult,
-                FirstFile = files.FirstOrDefault()?.FilePath // doar ca exemplu
+                BackupResult = backupResult
             });
         }
     }
+
 }

@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MediatR;
+using StorageAnalyzer.Shared.DataTransferObjects;
 
-namespace StorageAnalyzer.UseCases.Features.Scans.Commands
+public class StartScanCommand : IRequest<ScanSessionDto>
 {
-    class StartScanCommand
-    {
-    }
+    public string Path { get; set; } = string.Empty;
+    public bool UseAdvanced { get; set; }
 }

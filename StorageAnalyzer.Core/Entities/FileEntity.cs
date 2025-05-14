@@ -14,5 +14,7 @@
         public Guid? DuplicateSetId { get; set; }
         public DuplicateSet DuplicateSet { get; set; }
         public string UserId { get; set; }
+        public Guid? ScanSessionId { get; set; }           
+        public ScanSession ScanSession { get; set; } = null!;
     }
 }
