@@ -9,8 +9,8 @@ namespace StorageAnalyzer.Infrastructure.Services.FileAccessor
 {
     public interface IFileAccessor
     {
-        FileEntityDto GetInfo(string path);          // meta-date
-        byte[] ReadBytes(string path);        // conținut (opțional)
-        Stream OpenRead(string path);         // stream, dacă avem nevoie
+        FileEntityDto GetInfo(string path);         
+        byte[] ReadBytes(string path);        
+        Stream OpenRead(string path);       
     }
 }
