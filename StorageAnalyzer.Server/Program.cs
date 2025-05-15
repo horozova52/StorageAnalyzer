@@ -15,6 +15,10 @@ using StorageAnalyzer.Infrastructure.Repositories.File;
 using StorageAnalyzer.Infrastructure.Repositories.Folder;
 using StorageAnalyzer.Infrastructure.Services.WMI;
 using StorageAnalyzer.UseCases.Features.Backups.Handlers;
+using StorageAnalyzer.Infrastructure.Cash;
+using StorageAnalyzer.Infrastructure.Services.FileAccessor;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.Caching.Memory;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -52,6 +56,18 @@ builder.Services.AddScoped<IScanRepository, ScanRepository>();
 builder.Services.AddScoped<IFolderRepository, FolderRepository>();
 builder.Services.AddScoped<IDiskInfoService, DiskInfoService>();
 builder.Services.AddScoped<IServiceFactory, DefaultServiceFactory>();
+builder.Services.AddSingleton<ScanCacheService>();
+
+
+builder.Services.AddMemoryCache();
+builder.Services.AddScoped<FileAccessor>();
+builder.Services.AddScoped<IFileAccessor>(sp =>
+{
+    var real = sp.GetRequiredService<FileAccessor>();
+    var cache = sp.GetRequiredService<IMemoryCache>();
+    var log = sp.GetRequiredService<ILogger<FileAccessorProxy>>();
+    return new FileAccessorProxy(real, cache, log);
+});
 
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
