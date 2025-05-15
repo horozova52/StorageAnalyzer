@@ -24,12 +24,17 @@ namespace StorageAnalyzer.Infrastructure.Services.FileAccessor
         public FileEntityDto GetInfo(string path)
         {
             if (_cache.TryGetValue(path, out FileEntityDto dto))
+            {
+                _log.LogInformation("FileInfo HIT  {Path}", path);
                 return dto;
+            }
 
             dto = _inner.GetInfo(path);
             _cache.Set(path, dto, TimeSpan.FromMinutes(5));
+            _log.LogInformation("FileInfo MISS {Path}", path);
             return dto;
         }
+
 
         public byte[] ReadBytes(string path)
         {

@@ -10,8 +10,15 @@ public class DuplicateAnalysisService : IAnalysisService
 {
     public string Analyze(List<FileEntityDto> files)
     {
-        // Ex.: detectăm doar câte fișiere avem, deocamdată
-        // (Implementarea reală ar presupune calcul de hash, grupare etc.)
-        return $"[DuplicateAnalysisService] Found {files.Count} files. (Duplicate check not fully implemented)";
+        var duplicates = files
+            .Where(f => !string.IsNullOrEmpty(f.Hash))
+            .GroupBy(f => f.Hash)
+            .Where(g => g.Count() > 1)
+            .Select(g => $"{g.Key} → {g.Count()} files")
+            .ToList();
+
+        return duplicates.Count == 0
+            ? "[DuplicateAnalysisService] No duplicates found"
+            : "[DuplicateAnalysisService]\n" + string.Join('\n', duplicates);
     }
 }

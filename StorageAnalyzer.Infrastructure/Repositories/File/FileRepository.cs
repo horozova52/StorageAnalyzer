@@ -89,5 +89,21 @@ namespace StorageAnalyzer.Infrastructure.Repositories.File
                 await _dbContext.SaveChangesAsync();
             }
         }
+
+        public async Task<List<FileEntityDto>> GetBySessionAsync(Guid sessionId)
+        {
+            return await _dbContext.Files
+                .Where(f => f.ScanSessionId == sessionId)
+                .Select(f => new FileEntityDto
+                {
+                    Id = f.Id,
+                    FilePath = f.FilePath,
+                    SizeInBytes = f.SizeInBytes,
+                    Hash = f.Hash,
+                    DateModified = f.DateModified,
+                    UserId = f.UserId
+                })
+                .ToListAsync();
+        }
     }
 }

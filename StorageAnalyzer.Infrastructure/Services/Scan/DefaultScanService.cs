@@ -5,6 +5,7 @@ using StorageAnalyzer.Infrastructure.Contexts;
 using System;
 using System.IO;
 using StorageAnalyzer.Shared.DataTransferObjects;
+using StorageAnalyzer.Infrastructure.Services.Hash;
 
 public class DefaultScanService : IScanService
 {
@@ -26,8 +27,9 @@ public class DefaultScanService : IScanService
             {
                 FilePath = info.FullName,
                 SizeInBytes = info.Length,
-                DateModified = info.LastWriteTime
-                // Hash, FolderId, DuplicateSetId le poți seta ulterior, dacă ai logici separate
+                DateModified = info.LastWriteTime,
+
+                 Hash = HashService.Sha256(filePath)
             });
         }
 

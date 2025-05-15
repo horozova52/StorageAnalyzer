@@ -14,5 +14,7 @@ namespace StorageAnalyzer.Infrastructure.Repositories.File
         Task<List<FileEntityDto>> GetAllAsync(string userId);
         Task UpdateAsync(FileEntityDto fileDto);
         Task DeleteAsync(Guid id, string userId);
+        Task<List<FileEntityDto>> GetBySessionAsync(Guid sessionId);
+
     }
 }

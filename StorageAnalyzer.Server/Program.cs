@@ -7,7 +7,6 @@ using MudBlazor.Services;
 using Serilog;
 using StorageAnalyzer.Core.Entities;
 using StorageAnalyzer.Infrastructure.Cash;
-using StorageAnalyzer.Infrastructure.Logging;
 using StorageAnalyzer.Infrastructure.Contexts;
 using StorageAnalyzer.Infrastructure.Repositories;
 using StorageAnalyzer.Infrastructure.Repositories.Backup;
@@ -20,6 +19,7 @@ using StorageAnalyzer.Infrastructure.Services.WMI;
 using StorageAnalyzer.Server.Components;
 using StorageAnalyzer.Server.Components.Account;
 using StorageAnalyzer.UseCases.Features.Backups.Handlers;
+using StorageAnalyzer.Infrastructure.Logging;
 
 #region ───────── 1. Serilog early-init ─────────
 Log.Logger = new LoggerConfiguration()
@@ -75,7 +75,7 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 #region ───────── 5. MediatR  +  Pipeline Logging ─────────
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<BackupHandler>());
 builder.Services.AddTransient(typeof(IPipelineBehavior<,>),
-    typeof(StorageAnalyzer.Infrastructure.Logging.LoggingBehavior<,>));
+    typeof(LoggingBehavior<,>));
 #endregion
 
 #region ───────── 6. Factories / Services / Cache / Proxy ─────────
